@@ -31,12 +31,6 @@ class OtherController {
   ) => {
     let updatedUser = await this._otherService.saveImage(req.files, req);
 
-    console.log("sssssssssssssssssssssssss");
-    console.log(updatedUser);
-
-    console.log("ddddddddddddddddddddddd");
-    console.log(req.user);
-
     res.status(200).send(updatedUser);
   };
 }
