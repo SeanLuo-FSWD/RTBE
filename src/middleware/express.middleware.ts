@@ -2,9 +2,12 @@ import cors from "cors";
 import express from "express";
 import passport from "passport";
 import session from "express-session";
-import client_port from "../../env.config";
+import path from "path";
+import { client_port } from "../../env.config";
 
 module.exports = (app: any) => {
+  app.use(express.static(path.join(__dirname, "..", "public")));
+
   app.use(
     cors({
       origin: client_port,
@@ -27,5 +30,4 @@ module.exports = (app: any) => {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(express.static("public"));
 };

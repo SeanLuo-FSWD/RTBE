@@ -4,6 +4,12 @@ import { AuthService } from "./src/modules/auth/auth.service";
 import dotenv from "dotenv";
 dotenv.config();
 
-const server = new App([new AuthController(new AuthService())]);
+import OtherController from "./src/modules/other/other.controller";
+import { OtherServiceLocal } from "./src/modules/other/other.service.local";
+
+const server = new App([
+  new AuthController(new AuthService()),
+  new OtherController(new OtherServiceLocal()),
+]);
 
 server.start();

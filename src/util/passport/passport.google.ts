@@ -2,7 +2,6 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { PrismaClient } from ".prisma/client";
 
-
 const { user } = new PrismaClient();
 
 const googleStrategy = new GoogleStrategy(
@@ -11,7 +10,12 @@ const googleStrategy = new GoogleStrategy(
     clientSecret: process.env.GOOGLE_AUTH_CLIENTSECRET as string,
     callbackURL: "/api/auth/google/callback",
   },
-  async function (_accessToken:any, _refreshToken:any, profile: any, done: any) {
+  async function (
+    _accessToken: any,
+    _refreshToken: any,
+    profile: any,
+    done: any
+  ) {
     console.log("passport.google - GoogleStrategy : profile.emails[0]");
     console.log(profile.emails[0]);
 
@@ -53,8 +57,14 @@ passport.deserializeUser(async function (userId, done) {
       id: userId as number,
     },
   });
+
   if (foundUser) {
-    done(null, foundUser);
+    const deserializableUser = {
+      id: foundUser.id,
+      username: foundUser.username,
+      profileImg: foundUser.profileImg,
+    };
+    done(null, deserializableUser);
   } else {
     done({ message: "User not found by id." }, null);
   }

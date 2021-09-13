@@ -14,4 +14,5 @@ model User {
   id Int @default(autoincrement()) @id
   username String
   email String @unique
+  profileImg String ?
 }
