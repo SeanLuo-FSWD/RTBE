@@ -10,7 +10,8 @@ if (process.env.NODE_ENV === "production") {
   client_port = "some link from aws";
   multerUpload = multerUploadAWS;
 } else {
-  client_port = "http://localhost:3000";
+  // client_port = "http://localhost:3000";
+  client_port = "http://localhost:8000";
   multerUpload = multerUploadLocal;
 }
 

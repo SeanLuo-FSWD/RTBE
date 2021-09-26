@@ -7,14 +7,9 @@ class App {
 
   constructor(controllers: any[]) {
     this._app = express();
-    console.log('xxxxxxxxxxxxxxxxxxxxxx');
-    console.log(process.env.GOOGLE_AUTH_CLIENTID);
-    console.log('cccccccccccccccccccc');
-    console.log(typeof process.env.GOOGLE_AUTH_CLIENTID);
-    
-    
-    this.initializeMiddleWares();
     this.initializeControllers(controllers);
+    this.initializeMiddleWares();
+    this.initHostingReactUI();
   }
 
   public start() {
@@ -31,6 +26,12 @@ class App {
 
   public initializeMiddleWares() {
     require("./src/middleware/express.middleware")(this._app);
+  }
+
+  public initHostingReactUI() {
+    this._app.get("/", (req, res) => {
+      res.sendFile(path.join(__dirname, "build", "index.html"));
+    });
   }
 }
 

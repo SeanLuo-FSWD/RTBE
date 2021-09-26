@@ -6,7 +6,7 @@ import path from "path";
 import { client_port } from "../../env.config";
 
 module.exports = (app: any) => {
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static("build"));
 
   app.use(
     cors({
