@@ -10,7 +10,7 @@ module.exports = (app: any) => {
 
   app.use(
     cors({
-      origin: client_port,
+      origin: ["http://localhost:8000", "http://localhost:3000"],
       methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
       credentials: true,
     })

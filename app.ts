@@ -7,8 +7,8 @@ class App {
 
   constructor(controllers: any[]) {
     this._app = express();
-    this.initializeControllers(controllers);
     this.initializeMiddleWares();
+    this.initializeControllers(controllers);
     this.initHostingReactUI();
   }
 
@@ -29,7 +29,9 @@ class App {
   }
 
   public initHostingReactUI() {
-    this._app.get("/", (req, res) => {
+    this._app.get("/*", (req, res) => {
+      console.log("sent again....");
+
       res.sendFile(path.join(__dirname, "build", "index.html"));
     });
   }
