@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx prisma generate && node server.js",
-    "start:prod": "export NODE_ENV=production && ts-node server.ts",
+    "start": "node server.js",
+    "start1:prod": "npx prisma migrate deploy --schema && npx prisma generate './prisma/schema.prisma' && node server.js",
+    "start2:prod": "npx prisma generate && npx prisma migrate deploy --schema './prisma/schema.prisma' && node server.js",
     "dev": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist/",
@@ -27,6 +28,7 @@
     "multer": "^1.4.3",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
+    "prisma": "^3.0.2",
     "rimraf": "^3.0.2",
     "uuid": "^8.3.2"
   },
